@@ -1,2 +1,5 @@
 .env
 .vscode
+
+# Ignore executable
+weather
