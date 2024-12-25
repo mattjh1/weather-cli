@@ -9,7 +9,9 @@ import (
 	"github.com/mattjh1/weather-cli/display"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/mbndr/figlet4go"
 )
+
 
 var rootCmd = &cobra.Command{
 	Use:   "weather",
@@ -22,6 +24,24 @@ func init() {
 }
 
 func runCmd(cmd *cobra.Command, args []string) {
+	fig := figlet4go.NewAsciiRender()
+	options := figlet4go.NewRenderOptions()
+	options.FontColor = []figlet4go.Color{
+		figlet4go.ColorRed,
+		figlet4go.ColorGreen,
+		figlet4go.ColorYellow,
+		figlet4go.ColorBlue,
+		figlet4go.ColorMagenta,
+		figlet4go.ColorCyan,
+	}
+
+	renderStr, err := fig.RenderOpts("Weather CLI", options)
+	if err != nil {
+		fmt.Println("Error generating Figlet banner:", err)
+		return
+	}
+	fmt.Print(renderStr)
+
 	if viper.GetBool("help") {
 		cmd.Help()
 		return
@@ -31,11 +51,6 @@ func runCmd(cmd *cobra.Command, args []string) {
 
 	if city == "" {
 		fmt.Println("Please provide a city using the -c flag.")
-		return
-	}
-
-	if viper.GetBool("gpt") {
-		// generatePoeticWeatherReport(city)
 		return
 	}
 
