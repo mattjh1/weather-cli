@@ -13,11 +13,9 @@ func InitConfig(cmd *cobra.Command) {
 
 	cmd.Flags().StringP("city", "c", "", "City for which to get the weather forecast")
 	cmd.Flags().BoolP("help", "h", false, "Help for the weather command")
-	cmd.Flags().BoolP("gpt", "g", false, "Generate a poetic weather report using GPT AI")
 
 	viper.BindPFlag("city", cmd.Flags().Lookup("city"))
 	viper.BindPFlag("help", cmd.Flags().Lookup("help"))
-	viper.BindPFlag("gpt", cmd.Flags().Lookup("gpt"))
 }
 
 func initViper() {
